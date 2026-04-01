@@ -4,26 +4,89 @@ This guide will help you configure the environment variables needed for your por
 
 ## Quick Start
 
-1. **Frontend Configuration** - Copy `.env.example` to `.env` in the root directory
-2. **Backend Configuration** - Copy `.env.example` to `.env` in the `server` directory
-3. **Fill in your values** - Follow the instructions below
+1. **Copy `.env.example` to `.env`** in the root directory
+2. **Fill in your EmailJS credentials** - Follow the instructions below
+3. **Start the app** - Run `npm start`
 
 ---
 
-## Frontend (.env)
+## Frontend Configuration (.env)
 
-### Required Variables
+### Required Variables (EmailJS)
 
 | Variable | Description | How to Get |
 |----------|-------------|------------|
-| `REACT_APP_API_URL` | Backend API endpoint | Default: `http://localhost:5000/contact` |
-| `REACT_APP_MAILCHIMP_URL` | Mailchimp subscribe URL | See Mailchimp instructions below |
-| `REACT_APP_MAILCHIMP_U` | Mailchimp User ID | See Mailchimp instructions below |
-| `REACT_APP_MAILCHIMP_ID` | Mailchimp Audience ID | See Mailchimp instructions below |
+| `REACT_APP_EMAILJS_PUBLIC_KEY` | Your EmailJS Public Key | See EmailJS setup below |
+| `REACT_APP_EMAILJS_SERVICE_ID` | Your EmailJS Service ID | See EmailJS setup below |
+| `REACT_APP_EMAILJS_TEMPLATE_ID` | Your EmailJS Template ID | See EmailJS setup below |
 
-### Mailchimp Setup (Optional)
+### EmailJS Setup Instructions
 
-If you want to enable the newsletter subscription:
+**Step 1: Create an EmailJS Account**
+
+1. Go to [EmailJS](https://www.emailjs.com/) and sign up for a free account
+2. The free plan includes:
+   - 200 emails/month
+   - 2 email templates
+   - 1 email service
+
+**Step 2: Add an Email Service**
+
+1. In the EmailJS dashboard, go to **Email Services**
+2. Click **Add New Service**
+3. Select your email provider (Gmail, Outlook, etc.) or use custom SMTP
+4. Follow the connection instructions
+5. Copy the **Service ID** (e.g., `service_abc123`)
+
+**Step 3: Create an Email Template**
+
+1. Go to **Email Templates**
+2. Click **Create New Template**
+3. Use the following template variables:
+
+```
+Subject: Contact Form: {{from_name}}
+
+From: {{from_name}} ({{from_email}})
+Phone: {{phone}}
+
+Message:
+{{message}}
+```
+
+4. Customize the design as needed
+5. Save the template
+6. Copy the **Template ID** (e.g., `template_xyz789`)
+
+**Step 4: Get Your Public Key**
+
+1. Go to **Account** (click your name in top right)
+2. Select **API Keys** from the menu
+3. Copy the **Public Key** (e.g., `user_abc123xyz`)
+
+**Step 5: Configure Your .env File**
+
+Paste your credentials into the `.env` file:
+
+```env
+REACT_APP_EMAILJS_PUBLIC_KEY=user_abc123xyz
+REACT_APP_EMAILJS_SERVICE_ID=service_abc123
+REACT_APP_EMAILJS_TEMPLATE_ID=template_xyz789
+```
+
+---
+
+## Optional: Mailchimp Newsletter Configuration
+
+If you want to enable the newsletter subscription in the footer:
+
+| Variable | Description | How to Get |
+|----------|-------------|------------|
+| `REACT_APP_MAILCHIMP_URL` | Mailchimp subscribe URL | See Mailchimp instructions |
+| `REACT_APP_MAILCHIMP_U` | Mailchimp User ID | See Mailchimp instructions |
+| `REACT_APP_MAILCHIMP_ID` | Mailchimp Audience ID | See Mailchimp instructions |
+
+### Mailchimp Setup
 
 1. Go to [Mailchimp](https://mailchimp.com/) and log in
 2. Navigate to **Audience** > **Signup forms** > **Embedded forms**
@@ -43,63 +106,19 @@ Example from Mailchimp form:
 
 ---
 
-## Backend (server/.env)
-
-### Required Variables
-
-| Variable | Description | How to Get |
-|----------|-------------|------------|
-| `PORT` | Server port | Default: `5000` |
-| `ALLOWED_ORIGINS` | CORS allowed URLs | Default: `http://localhost:3000,http://127.0.0.1:3000` |
-| `EMAIL_USER` | Your Gmail address | Your Gmail account |
-| `EMAIL_PASS` | Gmail App Password | See Gmail instructions below |
-| `RECIPIENT_EMAIL` | Where to receive messages | Usually same as `EMAIL_USER` |
-
-### Gmail App Password Setup
-
-**Important**: You cannot use your regular Gmail password. You must create an App Password.
-
-1. Go to your [Google Account](https://myaccount.google.com/)
-2. Select **Security** from the left menu
-3. Under "Signing in to Google", enable **2-Step Verification** (if not already enabled)
-4. Go back to **Security** and select **App passwords**
-5. In the "App" dropdown, select **Mail**
-6. In the "Device" dropdown, select **Other (Custom name)**
-7. Enter a name like "Portfolio Contact Form" and click **Generate**
-8. Google will show a 16-character password (e.g., `abcd efgh ijkl mnop`)
-9. Copy this password **without spaces** and paste it in `.env`
-
-Example:
-```
-EMAIL_USER=sombath@gmail.com
-EMAIL_PASS=abcdefghijklmnop
-```
-
----
-
-## Testing
-
-### Start the Backend Server
-```bash
-cd server
-npm start
-```
-
-You should see:
-```
-🚀 Server running on http://localhost:5000
-📧 Contact endpoint: http://localhost:5000/contact
-```
+## Running the Application
 
 ### Start the Frontend
+
 ```bash
 npm start
 ```
 
 The app should open at `http://localhost:3000`
 
-### Test Contact Form
-1. Fill out the contact form
+### Test the Contact Form
+
+1. Fill out the contact form with your details
 2. Click "Send"
 3. Check your email inbox for the message
 
@@ -109,35 +128,43 @@ The app should open at `http://localhost:3000`
 
 When deploying to production:
 
-1. **Update `REACT_APP_API_URL`** to your production backend URL
-2. **Update `ALLOWED_ORIGINS`** to include your production frontend URL
+1. **Update your EmailJS settings**:
+   - In EmailJS dashboard, you can restrict which domains can send emails
+   - Add your production domain to the allowed origins
+
+2. **Update environment variables** with production values (if needed)
+
 3. **Never commit `.env` files** to version control (they're in `.gitignore`)
-
-Example production values:
-```
-# Frontend .env
-REACT_APP_API_URL=https://your-api.com/contact
-
-# Backend .env
-ALLOWED_ORIGINS=https://your-portfolio.com,https://www.your-portfolio.com
-```
 
 ---
 
 ## Troubleshooting
 
 ### Contact form not sending
-- Check that backend server is running (`npm start` in `server` folder)
-- Verify `EMAIL_USER` and `EMAIL_PASS` are correct
-- Make sure 2-Step Verification is enabled for Gmail
-- Check the browser console for errors
 
-### CORS errors
-- Verify `ALLOWED_ORIGINS` includes your frontend URL
-- Make sure there are no spaces in the comma-separated list
-- Restart the backend server after changing `.env`
+- Verify all three EmailJS variables are set correctly in `.env`
+- Check that your EmailJS service is connected (green status in dashboard)
+- Make sure your template ID matches exactly
+- Check the browser console for specific error messages
+- Verify you haven't exceeded your EmailJS free plan limits (200 emails/month)
+
+### EmailJS error: "Invalid Public Key"
+
+- Double-check you copied the Public Key correctly (no extra spaces)
+- Make sure you're using the Public Key, not the Private Key
+
+### EmailJS error: "Service not found"
+
+- Verify the Service ID is correct
+- Make sure the service is active in your EmailJS dashboard
+
+### EmailJS error: "Template not found"
+
+- Verify the Template ID is correct
+- Make sure the template exists in your EmailJS account
 
 ### Newsletter not working
+
 - Verify all Mailchimp variables are set correctly
 - Check that your Mailchimp audience is active
 - Test the Mailchimp URL directly in your browser
@@ -149,6 +176,19 @@ ALLOWED_ORIGINS=https://your-portfolio.com,https://www.your-portfolio.com
 ⚠️ **Important Security Practices:**
 
 1. **Never commit `.env` files** - They contain sensitive credentials
-2. **Use App Passwords** - Never use your regular Gmail password
-3. **Restrict CORS** - Only allow trusted origins in production
-4. **Use environment variables** - Never hardcode credentials in source code
+2. **Use environment variables** - Never hardcode credentials in source code
+3. **Restrict domains in EmailJS** - Add only your production domains in EmailJS settings
+4. **Monitor usage** - Keep track of your EmailJS monthly email limit
+
+---
+
+## EmailJS vs Backend Server
+
+This portfolio now uses **EmailJS** for the contact form, which means:
+
+✅ **No backend server required** - Emails are sent directly from the browser
+✅ **Easier deployment** - No need to host a separate server
+✅ **Free tier available** - 200 emails/month on the free plan
+✅ **Simple setup** - Just configure environment variables
+
+The `server/` folder is now optional and can be removed if you don't need it.

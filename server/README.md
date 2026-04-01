@@ -1,6 +1,10 @@
-# Portfolio Backend Server
+# Portfolio Backend Server (Optional/Deprecated)
 
-Node.js backend server for handling contact form submissions via email.
+> ⚠️ **Note:** This backend server is now **optional**. The portfolio now uses **EmailJS** for sending emails directly from the frontend, eliminating the need for a backend server.
+
+This folder is kept for reference or if you prefer to use a backend-based email solution.
+
+---
 
 ## 📋 Prerequisites
 
@@ -23,6 +27,8 @@ Edit the `.env` file with your credentials:
 PORT=5000
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=your-app-password-here
+RECIPIENT_EMAIL=your-email@gmail.com
+ALLOWED_ORIGINS=http://localhost:3000
 ```
 
 ### 3. Get Gmail App Password
@@ -119,3 +125,11 @@ Check if server is running.
 - `body-parser` - Parse JSON bodies
 - `nodemailer` - Send emails
 - `dotenv` - Environment variables
+
+## 🔄 Switching Back to Backend
+
+If you want to use this backend instead of EmailJS:
+
+1. Update `Contact.js` to use `fetch()` to call the backend API
+2. Set `REACT_APP_API_URL=http://localhost:5000/contact` in your frontend `.env`
+3. Start the backend server with `npm start` in the `server/` folder

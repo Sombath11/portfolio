@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import contactImg from '../assets/img/contact-img.svg';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import emailjs from '@emailjs/browser';
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -27,36 +28,27 @@ export const Contact = () => {
     e.preventDefault();
     setButtonText('Sending...');
 
-    const apiUrl =
-      process.env.REACT_APP_API_URL || 'http://localhost:5000/contact';
-
     try {
-      let response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
+      await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: `${formDetails.firstName} ${formDetails.lastName}`,
+          from_email: formDetails.email,
+          phone: formDetails.phone || 'Not provided',
+          message: formDetails.message,
         },
-        body: JSON.stringify(formDetails),
-      });
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      );
 
-      let result = await response.json();
-
-      if (response.ok && result.code === 200) {
-        setStatus({ success: true, message: 'Message sent successfully!' });
-        setFormDetails(formInitialDetails);
-      } else {
-        setStatus({
-          success: false,
-          message:
-            result.message || 'Something went wrong, please try again later.',
-        });
-      }
+      setStatus({ success: true, message: 'Message sent successfully!' });
+      setFormDetails(formInitialDetails);
     } catch (error) {
       setStatus({
         success: false,
-        message: 'Failed to connect to server. Please try again later.',
+        message: 'Failed to send message. Please try again later.',
       });
-      console.error('Form submission error:', error);
+      console.error('EmailJS error:', error);
     } finally {
       setButtonText('Send');
     }
@@ -68,7 +60,7 @@ export const Contact = () => {
         <Row className="align-items-center">
           <Col size={12} md={6}>
             <TrackVisibility>
-              {({ isVisible }) => ( 
+              {({ isVisible }) => (
                 <img
                   className={
                     isVisible ? 'animate__animated animate__zoomIn' : ''
@@ -139,21 +131,21 @@ export const Contact = () => {
                             onFormUpdate('message', e.target.value)
                           }
                         ></textarea>
+                        {status.message && (
+                          <Col>
+                            <p
+                              className={
+                                status.success === false ? 'danger' : 'success'
+                              }
+                            >
+                              {status.message}
+                            </p>
+                          </Col>
+                        )}
                         <button type="submit">
                           <span>{buttonText}</span>
                         </button>
                       </Col>
-                      {status.message && (
-                        <Col>
-                          <p
-                            className={
-                              status.success === false ? 'danger' : 'success'
-                            }
-                          >
-                            {status.message}
-                          </p>
-                        </Col>
-                      )}
                     </Row>
                   </form>
                 </div>

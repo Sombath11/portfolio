@@ -3,8 +3,6 @@ import meter2 from "../assets/img/meter2.svg";
 import meter3 from "../assets/img/meter3.svg";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
 import colorSharp from "../assets/img/color-sharp.png"
 import colorSharp2 from "../assets/img/color-sharp2.png"
 
@@ -37,9 +35,8 @@ export const Skills = () => {
             <div className="skill-bx wow zoomIn">
               <h2>Skills</h2>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.<br></br> Lorem Ipsum has been the industry's standard
-                dummy text.
+                Here are the technologies and tools I work with to bring ideas to life.<br></br> 
+                From front-end development to design, I strive to create efficient and elegant solutions.
               </p>
               <Carousel
                 responsive={responsive}
@@ -47,35 +44,35 @@ export const Skills = () => {
                 className="owl-carousel owl-theme skill-slider"
               >
                 <div className="item">
-                  <img src={meter1} alt="Image" />
+                  <img src={meter1} alt="HTML proficiency meter" />
                   <h5>HTML</h5>
                 </div>
                 <div className="item">
-                  <img src={meter3} alt="Image" />
+                  <img src={meter3} alt="CSS proficiency meter" />
                   <h5>CSS</h5>
                 </div>
                 <div className="item">
-                  <img src={meter2} alt="Image" />
+                  <img src={meter2} alt="JavaScript proficiency meter" />
                   <h5>Java Script</h5>
                 </div>
                 <div className="item">
-                  <img src={meter3} alt="Image" />
+                  <img src={meter3} alt="PHP proficiency meter" />
                   <h5>PHP</h5>
                 </div>
                 <div className="item">
-                  <img src={meter3} alt="Image" />
+                  <img src={meter3} alt="Bootstrap proficiency meter" />
                   <h5>Bootstrap</h5>
                 </div>
                 <div className="item">
-                  <img src={meter2} alt="Image" />
+                  <img src={meter2} alt="Tailwind proficiency meter" />
                   <h5>Tailwind</h5>
                 </div>
                 <div className="item">
-                  <img src={meter2} alt="Image" />
+                  <img src={meter2} alt="CorelDRAW proficiency meter" />
                   <h5>CorelDRAW</h5>
                 </div>
                 <div className="item">
-                  <img src={meter3} alt="Image" />
+                  <img src={meter3} alt="GitHub proficiency meter" />
                   <h5>Git Hup</h5>
                 </div>
               </Carousel>
@@ -83,8 +80,8 @@ export const Skills = () => {
           </div>
         </div>
       </div>
-      <img className="background-image-right" src={colorSharp2} alt="Image" />  
-      <img className="background-image-left" src={colorSharp} alt="Image" />
+      <img className="background-image-right" src={colorSharp2} alt="" />
+      <img className="background-image-left" src={colorSharp} alt="" />
     </section>
   );
 }

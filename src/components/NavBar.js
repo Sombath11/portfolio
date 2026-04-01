@@ -3,7 +3,6 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from '../assets/img/logo.png';
 import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
-import navIcon3 from '../assets/img/nav-icon3.svg';
 import navIcon4 from '../assets/img/telegram2.png';
 import { HashLink } from 'react-router-hash-link';
 import {
@@ -51,12 +50,12 @@ export const NavBar = () => {
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
-                <a href="https://www.linkedin.com/in/sombath-eat-b229603a7/" target="_blank"><img src={navIcon1} alt="" /></a>
-                <a href="https://web.facebook.com/sombath.khmer.52" target="_blank"><img src={navIcon2} alt="" /></a>
-                <a href="https://t.me/+855972808465" target="_blank"><img src={navIcon4} alt="" /></a>
+                <a href="https://www.linkedin.com/in/sombath-eat-b229603a7/" target="_blank" rel="noreferrer"><img src={navIcon1} alt="LinkedIn" /></a>
+                <a href="https://web.facebook.com/sombath.khmer.52" target="_blank" rel="noreferrer"><img src={navIcon2} alt="Facebook" /></a>
+                <a href="https://t.me/+855972808465" target="_blank" rel="noreferrer"><img src={navIcon4} alt="Telegram" /></a>
               </div>
               <HashLink to='#connect'>
-                <button className="vvd"><span>Let’s Connect</span></button>
+                <button className="vvd"><span>Let's Connect</span></button>
               </HashLink>
             </span>
           </Navbar.Collapse>

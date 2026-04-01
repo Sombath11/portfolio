@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import headerImg from '../assets/img/profile.png';
 import { ArrowRightCircle } from 'react-bootstrap-icons';
@@ -10,12 +10,32 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
-  const toRotate = ['Web Developer', 'Web Designer', 'UI/UX Designer'];
+  const toRotate = useMemo(() => ['Web Developer', 'Web Designer', 'UI/UX Designer'], []);
   const period = 2000;
   const bannerRef = useRef(null);
 
-  // Generate animated dots
+  const tick = useCallback(() => {
+    let i = loopNum % toRotate.length;
+    let fullText = toRotate[i];
+    let updatedText = isDeleting
+      ? fullText.substring(0, text.length - 1)
+      : fullText.substring(0, text.length + 1);
+
+    setText(updatedText);
+
+    if (isDeleting) setDelta((prevDelta) => prevDelta / 2);
+
+    if (!isDeleting && updatedText === fullText) {
+      setIsDeleting(true);
+      setDelta(period);
+    } else if (isDeleting && updatedText === '') {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+      setDelta(500);
+    }
+  }, [loopNum, isDeleting, text, toRotate, period]);
+
+  // Generate animated dots and lines
   useEffect(() => {
     const banner = bannerRef.current;
     if (!banner) return;
@@ -24,7 +44,7 @@ export const Banner = () => {
     for (let i = 0; i < 40; i++) {
       const dot = document.createElement('div');
       dot.className = 'star-dot';
-      const size = Math.random() * 4 + 3; // 3px to 7px
+      const size = Math.random() * 4 + 3;
       dot.style.cssText = `
         position: absolute;
         width: ${size}px;
@@ -43,7 +63,6 @@ export const Banner = () => {
       dots.push(dot);
     }
 
-    // Generate diagonal lines
     for (let i = 0; i < 4; i++) {
       const line = document.createElement('div');
       line.className = 'shoot-line';
@@ -68,6 +87,7 @@ export const Banner = () => {
     };
   }, []);
 
+  // Typing effect ticker
   useEffect(() => {
     let ticker = setInterval(() => {
       tick();
@@ -75,32 +95,7 @@ export const Banner = () => {
     return () => {
       clearInterval(ticker);
     };
-  }, [text]);
-
-  const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) setDelta((prevDelta) => prevDelta / 2);
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setIndex((prevIndex) => prevIndex - 1);
-      setDelta(period);
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setIndex(1);
-      setDelta(500);
-    } else {
-      setIndex((prevIndex) => prevIndex + 1);
-    }
-  };
+  }, [delta, tick]);
 
   return (
     <section className="banner" id="home" ref={bannerRef}>
@@ -131,7 +126,13 @@ export const Banner = () => {
                     security, and clean architecture. Turning ideas into
                     functional code is what I do best.
                   </p>
-                  <button onClick={() => console.log('connect')}>
+                  <button
+                    onClick={() =>
+                      document
+                        .getElementById('connect')
+                        ?.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  >
                     Let's Connect <ArrowRightCircle size={25} />
                   </button>
                 </div>
