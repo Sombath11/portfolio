@@ -100,6 +100,17 @@ nav.navbar.scrolled {
 nav.navbar a.navbar-brand {
     width: 15%;
 }
+@media screen and (max-width: 768px) {
+  nav.navbar a.navbar-brand {
+    width: 35%;
+  }
+}
+@media screen and (max-width:1284px) {
+  nav.navbar a.navbar-brand {
+    width: 40%;
+  }
+  
+}
 nav.navbar .navbar-nav .nav-link.navbar-link {
   font-weight: 400;
   color: #fff !important;
@@ -480,6 +491,172 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner button:hover svg {
   margin-left: 25px;
 }
+
+/* Banner Responsive Styles */
+@media (max-width: 1199px) {
+  .banner {
+    padding: 220px 0 80px 0;
+  }
+
+  .banner h1 {
+    font-size: 55px;
+  }
+
+  .green-frame {
+    width: 300px;
+    height: 360px;
+  }
+}
+
+@media (max-width: 991px) {
+  .banner {
+    padding: 180px 0 60px 0;
+    text-align: center;
+  }
+
+  .banner h1 {
+    font-size: 45px;
+  }
+
+  .banner p {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .banner button {
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .banner .tagline {
+    font-size: 16px;
+  }
+
+  .green-frame {
+    width: 280px;
+    height: 330px;
+    margin-top: 40px;
+  }
+
+  .txt-rotate > .wrap {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 767px) {
+  .banner {
+    padding: 140px 0 50px 0;
+  }
+
+  .banner h1 {
+    font-size: 36px;
+  }
+
+  .banner p {
+    font-size: 14px;
+  }
+
+  .banner button {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+  .banner button svg {
+    font-size: 20px;
+  }
+
+  .banner .tagline {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+
+  .green-frame {
+    width: 240px;
+    height: 280px;
+  }
+
+  .green-frame__ring.outer {
+    inset: -15px;
+  }
+
+  .green-frame__ring.middle {
+    inset: -8px;
+  }
+
+  .green-frame__orbit {
+    inset: -22px;
+  }
+
+  .green-frame__glow {
+    width: 200px;
+    height: 50px;
+    bottom: -40px;
+  }
+}
+
+@media (max-width: 575px) {
+  .banner {
+    padding: 100px 0 40px 0;
+  }
+
+  .banner h1 {
+    font-size: 28px;
+  }
+
+  .banner p {
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .banner button {
+    font-size: 14px;
+    margin-top: 25px;
+  }
+
+  .banner button svg {
+    font-size: 18px;
+    margin-left: 8px;
+  }
+
+  .banner button:hover svg {
+    margin-left: 18px;
+  }
+
+  .banner .tagline {
+    font-size: 12px;
+    padding: 5px 7px;
+  }
+
+  .green-frame {
+    width: 200px;
+    height: 240px;
+  }
+
+  .green-frame__ring.outer {
+    inset: -12px;
+    border-width: 1.5px;
+  }
+
+  .green-frame__ring.middle {
+    inset: -6px;
+  }
+
+  .green-frame__orbit {
+    inset: -18px;
+  }
+
+  .green-frame__dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .green-frame__glow {
+    width: 160px;
+    height: 40px;
+    bottom: -30px;
+  }
+}
+
 @keyframes dotTwinkle {
   0%, 100% { opacity: 0.1; transform: scale(1); }
   50%       { opacity: 1;   transform: scale(1.6); }
@@ -821,6 +998,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-weight: 500;
   letter-spacing: 0.5px;
   border-radius: 18px;
+  white-space: nowrap;
 }
 .footer img {
   width: 35%;
@@ -831,6 +1009,75 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   color: #B8B8B8;
   letter-spacing: 0.5px;
   margin-top: 20px;
+}
+
+/* Newsletter Responsive Styles */
+@media (max-width: 1199px) {
+  .newsletter-bx {
+    padding: 60px 80px;
+  }
+}
+
+@media (max-width: 991px) {
+  .newsletter-bx {
+    padding: 50px 40px;
+    margin-top: -80px;
+  }
+
+  .newsletter-bx h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .new-email-bx {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .new-email-bx input {
+    width: 100%;
+    text-align: center;
+    padding: 12px 15px;
+  }
+
+  .new-email-bx button {
+    width: 100%;
+    padding: 15px 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .newsletter-bx {
+    padding: 40px 25px;
+    margin-top: -60px;
+    border-radius: 35px;
+  }
+
+  .newsletter-bx h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  .newsletter-bx {
+    padding: 30px 20px;
+    margin-top: -40px;
+    border-radius: 25px;
+  }
+
+  .newsletter-bx h3 {
+    font-size: 18px;
+  }
+
+  .new-email-bx input {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .new-email-bx button {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
 }
 
 
