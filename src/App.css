@@ -1011,6 +1011,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin-top: 20px;
 }
 
+
+
 /* Newsletter Responsive Styles */
 @media (max-width: 1199px) {
   .newsletter-bx {
@@ -1079,6 +1081,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     font-size: 14px;
   }
 }
+
 
 
 

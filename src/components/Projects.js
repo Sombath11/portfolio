@@ -12,23 +12,26 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "Place in Cambodia",
-      description: "Design & Development",
+      title: 'Find Place in Cambodia',
+      description:
+        'Travel & Tourism Website :ជជាគេហទំព័រសម្រាប់ណែនាំអ្នកទេសចរឱ្យស្គាល់ពីតំបន់កម្សាន្តនានាក្នុងប្រទេសកម្ពុជា ដាក់បញ្ចូលនូវផែនទី (Map) ដែលបង្ហាញពីទីតាំងពិតប្រាកដនៃតំបន់ទេសចរណ៍នីមួយៗ។',
       imgUrl: projImg1,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: 'Full Stack Web Development',
+      description:
+        'PHP, MySQL Development: វេទិកាទិញទំនិញតាមអនឡាញ ដែលផ្តោតលើការគ្រប់គ្រងទិន្នន័យផលិតផល (Inventory Management) និងប្រព័ន្ធកន្ត្រកទំនិញ (Shopping Cart)។',
       imgUrl: projImg2,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: 'Static Web Design',
+      description:
+        'Design & Development :ជាគម្រោងវេបសាយបែបព័ត៌មាន និងបង្ហាញផលិតផល (ដូចជាហាងកាមេរ៉)។',
       imgUrl: projImg3,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: 'Static Web Design',
+      description: 'Design & Development',
       imgUrl: projImg4,
     },
   ];
