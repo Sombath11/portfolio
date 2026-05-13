@@ -26,7 +26,22 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 1. Validation Check: Ensure required fields are not empty or just spaces
+    if (
+      !formDetails.firstName.trim() ||
+      !formDetails.email.trim() ||
+      !formDetails.message.trim()
+    ) {
+      setStatus({
+        success: false,
+        message: 'Please fill in all required fields.',
+      });
+      return; // This stops the function here
+    }
+
     setButtonText('Sending...');
+    // ... rest of your try/catch block for emailjs.send
 
     try {
       await emailjs.send(
@@ -38,7 +53,7 @@ export const Contact = () => {
           phone: formDetails.phone || 'Not provided',
           message: formDetails.message,
         },
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
       );
 
       setStatus({ success: true, message: 'Message sent successfully!' });
@@ -90,6 +105,7 @@ export const Contact = () => {
                           onChange={(e) =>
                             onFormUpdate('firstName', e.target.value)
                           }
+                          required
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -100,6 +116,7 @@ export const Contact = () => {
                           onChange={(e) =>
                             onFormUpdate('lastName', e.target.value)
                           }
+                          required
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -110,6 +127,7 @@ export const Contact = () => {
                           onChange={(e) =>
                             onFormUpdate('email', e.target.value)
                           }
+                          required
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -120,6 +138,7 @@ export const Contact = () => {
                           onChange={(e) =>
                             onFormUpdate('phone', e.target.value)
                           }
+                          required
                         />
                       </Col>
                       <Col size={12} className="px-1">
@@ -130,6 +149,7 @@ export const Contact = () => {
                           onChange={(e) =>
                             onFormUpdate('message', e.target.value)
                           }
+                          required
                         ></textarea>
                         {status.message && (
                           <Col>
